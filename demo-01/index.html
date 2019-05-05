@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .item{
+            background-color: cornflowerblue;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+
+    <!--case1-->
+    <h2>{{msg}}</h2>
+
+    <!--case2-->
+    <input type="text" v-model="info">
+    <p><span>Info:</span>{{info}}</p>
+    <button @click="addList" >添加</button>
+
+    <!--case3-->
+    <h2>Item List</h2>
+    <ul>
+        <todo-item v-for="item in list" :item="item"></todo-item>
+    </ul>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+<script>
+
+    Vue.component('todo-item',{
+        props:['item'],
+        template:'<li class="item">{{item}}</li>'
+    });
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                msg: 'hello first vue demo',
+                info: '',
+                list: []
+            }
+        },
+        methods: {
+            addList() {
+                console.log("addList");
+                this.list.push(this.info);
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
