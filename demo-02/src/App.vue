@@ -1,46 +1,68 @@
 <template>
   <div id="app">
-    {{msg}}
-    <div>
-      <input type="text" v-model="info">
-      <button v-on:click="handleClick">添加</button>
-    </div>
-    <ul>
 
-      <todo-item v-for="item in list" :key="item">
-        <!--插座-->
-        <template v-slot:item="itemProps">
-          <span :style="{fontSize: '20px', color: itemProps.checked ? 'red': 'blue'}">{{item}}</span>
-        </template>
-      </todo-item>
+    <!--01 双向绑定-->
+    <h2>{{msg}}</h2>
+    <input type="text" v-model="msg">
+    <button @click="getMsg()">获取消息</button>
+    <button @click="setMsg()">设置消息</button>
 
-    </ul>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+    <!--02 获取dom-->
+    <input type="text" ref="userinfo">
+    <div ref="box">一个盒子</div>
+    <button @click="getInputValue()">获取第二个表单的数据</button>
+
   </div>
 </template>
 
 <script>
-  import TodoItem from './components/TodoItem.vue'
-  export default {
-    name: 'app',
-    data() {
-      return {
-        msg: 'hello geektime',
-        info: '',
-        list: [],
-      }
-    },
-    methods: {
-      handleClick() {
-        this.list.push(this.info)
-        this.info = ''
-      }
-    },
-    components: {
-      TodoItem,
+
+export default {
+  name: 'app',
+  data() {
+    return {
+      msg:'hello vue'
     }
+  },
+  methods : {
+
+    getMsg(){
+      alert(this.msg);
+    },
+
+
+    setMsg(){
+      this.msg = "改变后的数据";
+    },
+
+    getInputValue(){
+      //获取ref定义的节点
+      window.console.log(this.$refs.userinfo);
+
+      this.$refs.box.style.background = 'red';
+
+      alert(this.$refs.userinfo.value);
+    }
+  },
+  components: {
+
   }
+}
 </script>
 
 <style>
-
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
